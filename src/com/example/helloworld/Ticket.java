@@ -2,19 +2,25 @@ package com.example.helloworld;
 import java.util.*;
 
 public abstract class Ticket {
-    protected final double coefficient = 0.03;
     protected int timeGiven;
     protected String outboundAirport;
     protected String inboundAirport;
-    protected Date outboundDate;
-    protected Date inboundDate;
+    protected FlightDate inboundDate;
+    protected FlightDate outboundDate;
     protected int numberOfPax;
-    protected int price;
-    protected Calendar timeLimit;
 
-    public int getMiles(){
-        int miles = (int) Math.round(price*coefficient);
-        return miles;
+    public int getNumberOfPax(){
+        return numberOfPax;
+    }
+
+    public Ticket(){};
+    public Ticket(int timeGiven, String outboundAirport, String inboundAirport, int numberOfPax, FlightDate inboundDate, FlightDate outboundDate){
+        this.timeGiven = timeGiven;
+        this.outboundAirport = outboundAirport;
+        this.inboundAirport = inboundAirport;
+        this.numberOfPax = numberOfPax;
+        this.outboundDate = outboundDate;
+        this.inboundDate = outboundDate;
     }
 
     public void book() {
@@ -25,10 +31,16 @@ public abstract class Ticket {
     }
 
     public void buy() {
-        int totalPrice = price * numberOfPax;
-        System.out.println("Your flight details: \n" +
-                            "outbound"
-                );
+        String[] randomList = new String[]{"A", "B", "C", "1", "2", "3", "4", "5"};
+        String[] ticketPNR = new String[6];
+        for (int i = 0; i < ticketPNR.length; i++){
+            int randomNumber = (int)(Math.random() * 8);
+            ticketPNR[i] = randomList[randomNumber];
+        }
+        String pnrNumberString = String.join("", ticketPNR);
+        System.out.println("Your ticket number is " + pnrNumberString);
     }
+
+    public abstract void calculatePrice();
 
 }
